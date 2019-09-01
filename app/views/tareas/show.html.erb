@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <%= image_tag @tarea.photo, class: "card-img-top" %>
+      <div class="card-body">
+        <h5 class="card-title"><%= @tarea.name %></h5>
+        <p class="card-text"><%= @tarea.description %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Primeros 5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @top.each do |u|%>
+          <tr class="row">
+            <td class="col-3"><%= User.find(u).photo ? image_tag(User.find(u).photo, :class => "img-fluid") : image_tag("https://imagenesparaperfildewasap.com/wp-content/uploads/no-hay-foto-1-300x300.png", :class => "img-fluid")%></td>
+            <td class="col"><%= User.find(u).name ? User.find(u).name : "Registro sin nombre"%></td>
+            <td><%= User.find(u).email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Todos los que hicieron la tarea</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @all.each do |u|%>
+          <tr>
+            <td><%= User.find(u).email %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <% @tareas.each_slice(4) do |row| %>
+      <% row.each do |tarea|%>
+        <div class="col-3">
+          <% if user_signed_in? %>
+            <% if  current_user.completes.find_by(tarea_id: tarea.id) %>
+              <%= image_tag tarea.photo, class: "card-img-top " %>
+            <% else %>
+              <%= image_tag tarea.photo, class: "card-img-top gris" %>
+            <% end %>
+            <% else %>
+              <%= image_tag tarea.photo, class: "card-img-top" %>
+          <% end %>
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to tarea.name, tarea_path(tarea.id) %></h5>
+              <% if user_signed_in? %>
+                <% if  current_user.completes.find_by(tarea_id: tarea.id) %>
+                  <p>revisado</p>
+                <% else %>
+                  <p>no revisado</p>
+                <% end %>
+              <% end %>
+            <br>
+            <div class="m-3">
+              <% if user_signed_in? %>
+                <% if  current_user.completes.find_by(tarea_id: tarea.id) %>
+                  <%= link_to "NO Revisados",tarea_complete_path(tarea, current_user),method: :delete , class: 'btn btn-danger'%>
+                <% else %>
+                  <%= link_to "Revisado", tarea_completes_path(tarea),method: :post,class: 'btn btn-success'%>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
