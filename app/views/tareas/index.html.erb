@@ -14,8 +14,9 @@
           <% end %>
           <div class="card-body">
             <h5 class="card-title">
-              <%= link_to tarea.name, tarea_path(tarea.id) %></h5>
+              <%= tarea.name%>
               <% if user_signed_in? %>
+              <%= link_to tarea.name, tarea_path(tarea.id) %></h5>
                 <% if  current_user.completes.find_by(tarea_id: tarea.id) %>
                   <p>revisado</p>
                 <% else %>
